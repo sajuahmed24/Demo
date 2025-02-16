@@ -1,47 +1,351 @@
 <!DOCTYPE html>
-
-<html>
+<html lang="en">
 <head>
-  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
-  <title>you and me</title>
-  <style>
-    body {
-   background-image: url('e8cb2d9115637ff34cdb07b881679744.jpg'); /* Replace with your image URL */
-      background-size:cover;
-      background-position:center;
-      background-repeat: no-repeat;
-      height: 100vh;
-      margin: 0;
-      
-    
-  }
-    h3{color:white;}
-  div{
-    
-    text-align :center;
-    margin:10%;
-    padding-top:40%;
-    padding-bottom:10%;
-  }
-    a{
-  background-color: #68d388;
-      border-radius:8px;
-  color:white;
-  padding: 14px 25px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-      text-transform:uppercase;
-      font-weight:bold;
-      font-size:120%;
-}
-    
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>its our time </title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0);
+            justify-content: center;
+            align-items: center;
+            z-index: 99;
+        }
+
+        .popup {
+        margin:0 autu;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .popup h2 {
+            margin: 0;
+            color:  #9B59B6;
+        }
+
+        .popup div#daysSince ,p {
+            font-size: 14px;
+            color: #555;
+            margin: 35px 0;
+        }
+
+        .popup button {
+            background-color: #ff1493;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .popup button:hover {
+            background-color: #ff69b4;
+        }
+
+        .trigger-button {
+            background-color: #ff1493;
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            font-size: 18px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .trigger-button:hover {
+            background-color: #ff69b4;
+        }
+
+        .popupt {
+            position: absolute;
+            background: #9B59B6;
+            color: #fff;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 16px;
+            animation: fadeInOut 3s linear infinite;
+        }
+
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(0.8); }
+        }
+
+        .emoji {
+            position: absolute;
+            font-size: 15px;
+            opacity: 1;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-50px);
+                opacity: 0.4;
+            }
+            100% {
+                transform: translateY(90vh);
+                opacity: 0.4;
+            }
+        }
+
+        #emoji-container, #text-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        
+        
+        
+        
+        
+        
+        
+        .surprise-button {
+        background-color: #333;
+        
+        padding: 10px 20px;
+        font-size: 18px;
+        cursor: pointer;
+        border: none;
+        margin-bottom: 20px;
+        }
+        
+        .surprise-button:hover {
+        background-color: #555;
+        }
+        
+        .slider-container {
+        position: relative;
+        width:100%;
+        height:auto;
+        background-color:#FFE1F1;
+        border-radius: 10px;
+        overflow: hidden;
+        color: #fff;
+        text-align: center;
+        
+        display: none; /* Initially hidden */
+        }
+        
+        .slider-message {
+        display: none;
+        margin-bottom:40px;
+        }
+        
+        .arrow-button {
+        position: absolute;
+        bottom:0;
+        
+        background-color: #333;
+        color: #fff;
+        border: none;
+        font-size: 16px;
+        cursor: pointer;
+        padding: 10px;
+        
+        }
+        
+        .arrow-button:hover {
+        background-color: #555;
+        }
+        
+        .prev-button {
+        left: 5px;
+        }
+        
+        .next-button {
+        right: 5px;
+        }
+        
+        
+    </style>
 </head>
 <body>
-  <div>
-    <a href="https://drive.google.com/folderview?id=15JMuwQr5CsY3YSSUIjq3P-4EO__xAeGL">pookie</a>
- 
-  </div>
+
+    <button class="trigger-button" onclick="showPopup()">surprise!☺️</button>
+
+    <div class="popup-container" id="popup-container">
+        <div class="popup">
+            <h2>surprise jaaan💖🥺💫</h2>
+            
+            <div id="daysSince"></div>
+            
+            
+            
+            <button class="surprise-button" id="surpriseButton">Surprise Message</button>
+            
+            <div class="slider-container" id="sliderContainer">
+            <div class="slider-message" id="message1">
+            <p>"প্রিয়,
+            তোমার সঙ্গে প্রতিটি মুহূর্তই অমূল্য। তোমার হাসি, তোমার ভালোবাসা, সব কিছুই আমার জীবনের সবচেয়ে বড় উপহার। যখন তুমি পাশে থাকো, তখন পৃথিবী পুরোপুরি ঠিক লাগে। তুমি আমার জীবনের সবচেয়ে সুন্দর অংশ, এবং আমি চিরকাল তোমার পাশে থাকতে চাই। ভালোবাসি তোমাকে, আজ এবং চিরকাল।"</p>
+            </div>
+            <div class="slider-message" id="message2">
+            <p>"প্রিয়,
+            তুমি ছাড়া আমার পৃথিবী অর্ধেক। তোমার প্রতি ভালোবাসা প্রতিদিন আরও গভীর হয়। তোমার চোখে আমি যে শান্তি দেখি, তা পৃথিবীর সবচেয়ে দামী উপহার। তুমি আমার শক্তি, আমার হাসির কারণ, এবং জীবনের সবচেয়ে সুন্দর অংশ। যখন আমি তোমার পাশে থাকি, মনে হয় যেন সব কিছুই সম্ভব। তোমার ভালোবাসায় সবকিছু পূর্ণ, আর আমি চিরকাল তোমার সঙ্গে থাকতে চাই। ভালোবাসি তোমাকে, সব সময়।"</p>
+            </div>
+            <div class="slider-message" id="message3">
+            <p>"প্রিয়,
+            তুমি আমার জীবনের সবচেয়ে বড় পাওয়া। তোমার পাশে থাকলেই যেন সময় থেমে যায়, পৃথিবী শান্ত হয়ে যায়। তুমি না থাকলে আমি অসম্পূর্ণ, কিন্তু তোমার সান্নিধ্যে সব কিছু পূর্ণ হয়। তোমার সাথে প্রতিটি মুহূর্ত এমনভাবে উপভোগ করি, যেন এটাই আমার জীবনের সবচেয়ে বড় আনন্দ। আমার ভালোবাসা কখনোই তোমার জন্য যথেষ্ট হবে না, কারণ তুমি সে উপহার যার জন্য আমি সারাজীবন কৃতজ্ঞ। তোমার হাসি আমার হৃদয়কে শান্তি দেয়, এবং আমি চিরকাল তোমার পাশে থাকতে চাই। ভালোবাসি তোমাকে, আর কখনো কিছুই তোমাকে হারাতে দিব না।"</p>
+            </div>
+            
+            <button class="arrow-button prev-button" id="prevButton">&#8592; Previous</button>
+            <button class="arrow-button next-button" id="nextButton">Next &#8594;</button>
+            </div>
+            
+            
+            <button onclick="closePopup()">Close</button>
+        </div>
+        <div id="emoji-container"></div>
+        <div id="text-container"></div>
+    </div>
+
+    <script>
+        let emojiInterval, textInterval; // ইন্টারভাল সংরক্ষণের জন্য ভ্যারিয়েবল
+
+        function createEmoji() {
+            const emojiContainer = document.getElementById("emoji-container");
+            const emoji = document.createElement("div");
+            const emojis = ['❤️', '💖', '💕', '💘', '💞', '💓', '😍', '💗', '😘', '❤️‍🔥'];
+
+            emoji.classList.add("emoji");
+            emoji.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+            emojiContainer.appendChild(emoji);
+
+            emoji.style.position = "absolute";
+            emoji.style.left = Math.random() * 90 + "%";
+            emoji.style.top = Math.random() * 90 + "%";
+            emoji.style.animationDuration = (Math.random() * 3 + 2) + "s";
+            emoji.style.fontSize = (Math.random() * 10 + 10) + "px";
+
+            setTimeout(() => { emoji.remove(); }, 5000);
+        }
+
+        function createPopupText() {
+            const textContainer = document.getElementById("text-container");
+            const popup = document.createElement("div");
+            const messages = ["jaaan!", "amar lokki bou!", "be happy!", "bebe!", "i love you🥺"];
+
+            popup.className = "popupt";
+            popup.innerText = messages[Math.floor(Math.random() * messages.length)];
+            textContainer.appendChild(popup);
+
+            popup.style.position = "absolute";
+            popup.style.left = Math.random() * 80 + "%";
+            popup.style.top = Math.random() * 80 + "%";
+
+            setTimeout(() => { popup.remove(); }, 3000);
+        }
+
+        function showPopup() {
+            document.getElementById("popup-container").style.display = "flex";
+            
+            // ইমোজি ও টেক্সট পপআপ চালু করো
+            emojiInterval = setInterval(createEmoji, 50);
+            textInterval = setInterval(createPopupText, 700);
+        }
+
+        function closePopup() {
+            document.getElementById("popup-container").style.display = "none";
+            
+            // ইমোজি ও টেক্সট বন্ধ করো
+            clearInterval(emojiInterval);
+            clearInterval(textInterval);
+
+            // আগের ইমোজি ও টেক্সট মুছে ফেলো
+            document.getElementById("emoji-container").innerHTML = "";
+            document.getElementById("text-container").innerHTML = "";
+        }
+    </script>
+<script>
+   // JavaScript for handling the slider functionality
+   let currentMessageIndex = 0;
+   const messages = document.querySelectorAll('.slider-message');
+   const sliderContainer = document.getElementById('sliderContainer');
+   
+   // Show the first message
+   messages[currentMessageIndex].style.display = 'block';
+   
+   // Function to hide all messages
+   function hideAllMessages() {
+     messages.forEach(message => {
+       message.style.display = 'none';
+     });
+   }
+
+   // Function to show the current message
+   function showMessage(index) {
+     hideAllMessages();
+     messages[index].style.display = 'block';
+   }
+
+   // Next button functionality
+   document.getElementById('nextButton').addEventListener('click', function() {
+     currentMessageIndex = (currentMessageIndex + 1) % messages.length;
+     showMessage(currentMessageIndex);
+   });
+
+   // Previous button functionality
+   document.getElementById('prevButton').addEventListener('click', function() {
+     currentMessageIndex = (currentMessageIndex - 1 + messages.length) % messages.length;
+     showMessage(currentMessageIndex);
+   });
+
+   // Surprise button functionality to show the main slider container
+   document.getElementById('surpriseButton').addEventListener('click', function() {
+     sliderContainer.style.display = 'block'; // Show the slider container
+     this.style.display = 'none'; // Hide the Surprise button
+   });
+ </script>
+<script>
+       // Set the target date (September 13, 2024)
+       var targetDate = new Date("September 20, 2024").getTime();
+
+       // Function to calculate days since the target date
+       function updateDaysSince() {
+           var now = new Date().getTime();
+           var distance = now - targetDate; // Difference in milliseconds
+
+           // Calculate days
+           var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+
+           // Display the days
+           document.getElementById("daysSince").innerHTML = days + " days since September 20, 2024";
+       }
+
+       // Call the function when the page loads
+       updateDaysSince();
+   </script>
+
+
 </body>
-</html>
+  </html>
